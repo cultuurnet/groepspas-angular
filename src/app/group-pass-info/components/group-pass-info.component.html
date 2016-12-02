@@ -1,0 +1,32 @@
+<div class="logo">Groepspas</div>
+<div class="text-center">
+    <p>Raadpleeg het saldo op je groepspas</p>
+    <div class="bg-danger" *ngIf="groupPassError">
+        {{ groupPassError }}
+    </div>
+    <form>
+        <div class="text-left"><label>UiTPAS-nummer</label></div>
+        <div class="group-pass-number pull-left"><input name="groupPassNumber" type="text" [(ngModel)]="groupPassNumber" required></div>
+        <div class="group-pass-submit pull-right"><button class="button" type="submit" (click)="getGroupPassInfo()">Bevestigen</button></div>
+    </form>
+    <div class="group-pass-info text-left" *ngIf="groupPassInfo">
+        <div class="info-title"><label>INFORMATIE GROEPSPAS</label></div>
+        <div>Naam groepspas: {{ groupPassInfo.name }}</div>
+        <div *ngIf="groupPassInfo.kansenStatuut">
+            <div>Kansenstatuut: Ja</div>
+            <div>Aantal resterende beurten: {{ groupPassInfo.availableTickets }}</div>
+            <div>Geldig tot: {{ groupPassInfo.endDate | stringToDate | date: 'dd/MM/yyyy'  }}</div>
+        </div>
+        <div *ngIf="!groupPassInfo.kansenStatuut">
+            <div>Kansenstatuut: Nee</div>
+            <div *ngFor="let coupon of groupPassInfo.ticketSaleCoupons">
+                <div class="coupon-name"><label>{{ coupon.name }}</label></div>
+                <ul>
+                    <li>Aantal resterende bonnen: {{ coupon.remainingTotal.periodVolume }}</li>
+                    <li>Geldig tot: {{ coupon.validTo | stringToDate | date: 'dd/MM/yyyy' }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p><small>Heb je nog vragen? Contacteer ons via <a href="mailto:jouwgemeente@uitpas.be">jouwgemeente@uitpas.be</a>.</small></p>
+</div>

@@ -1,0 +1,61 @@
+// Main
+html,
+body {
+  height: 100%;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.004);
+}
+
+body {
+  min-height: 100%;
+  background-color: $white;
+}
+
+// Type
+p {
+  margin: 0 0 $rh-sml;
+}
+
+ol,
+ul {
+  margin: $rh-xsm 0;
+  .alert &,
+  .sidebar & {
+    margin: $rh-xsm 0;
+  }
+}
+
+// Links
+a {
+  @include transitions((color, background, border));
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+hr {
+  margin-top: $rh-xsm;
+  margin-bottom: $rh-xsm;
+  .well & {
+    border-color: $well-border;
+  }
+}
+
+.direction {
+  font-style: italic;
+  color: $gray-50;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}

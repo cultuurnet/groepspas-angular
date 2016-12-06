@@ -11,7 +11,7 @@ import {GroupPassInfo} from "../group-pass-info";
 export class GroupPassInfoComponent {
 
     groupPassInfo: GroupPassInfo;
-    groupPassNumber: string; //"1000000265008"
+    groupPassNumber: string;
     groupPassError : string;
     constructor(private uitpasApiService: UitpasApiService) {}
 
@@ -21,20 +21,9 @@ export class GroupPassInfoComponent {
         this.uitpasApiService.getGroupPassInfo(this.groupPassNumber)
             .subscribe(
                 info => this.groupPassInfo = info,
-                error => this.setError(error),
-                () => this.getValuesToPrint(this.groupPassInfo)
+                error => this.setError(error)
         );
 
-    }
-
-    getValuesToPrint(info : GroupPassInfo) {
-        console.log(info);
-        if (info.kansenStatuut) {
-
-        }
-        else {
-
-        }
     }
 
     setError(error : any) {

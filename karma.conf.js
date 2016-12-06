@@ -4,7 +4,9 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
-        files: [{ pattern: './config/karma-test-shim.js', watched: false }],
+        files: [
+          { pattern: './config/karma-test-shim.js', watched: false }
+        ],
 
         preprocessors: {
             './config/karma-test-shim.js': ['webpack', 'sourcemap']
@@ -32,8 +34,9 @@ module.exports = function (config) {
         logLevel: config.LOG_INFO,
         autoWatch: false,
         browsers: ['PhantomJS'],
-        singleRun: true
+        singleRun: true,
     };
 
     config.set(_config);
+
 };

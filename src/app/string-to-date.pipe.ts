@@ -1,8 +1,10 @@
 import {Pipe, PipeTransform} from '@angular/core';
+
 /**
  * Pipe to transform a string to a date
  */
 @Pipe({name: 'stringToDate'})
+
 export class StringToDatePipe implements PipeTransform {
     /**
      * Constructor

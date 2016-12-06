@@ -38,6 +38,6 @@ gulp.task('build', plugins.shell.task([
 ]));
 
 gulp.task('serve', function(done) {
-    runSequence('clean:dist', 'sass', 'dev-server', done);
+    runSequence('clean:dist', 'sass', 'build', 'dev-server', done);
 });
 

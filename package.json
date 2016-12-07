@@ -10,7 +10,6 @@
   "scripts": {
     "lint": "tslint \"src/**/*.ts\"",
     "postinstall": "webdriver-manager update",
-    "e2e": "protractor",
     "start": "gulp serve",
     "build": "gulp build",
     "test": "karma start"
@@ -24,20 +23,21 @@
     "@angular/platform-browser": "^2.1.1",
     "@angular/platform-browser-dynamic": "^2.1.1",
     "@angular/router": "^3.1.1",
+    "@types/core-js": "^0.9.34",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "jquery": "^2.2.4",
+    "json-loader": "^0.5.4",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
-    "zone.js": "^0.6.25",
-    "@types/core-js": "^0.9.34"
+    "zone.js": "^0.6.25"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.35",
     "@types/node": "^6.0.45",
-    "@types/protractor": "^1.5.20",
     "@types/selenium-webdriver": "2.44.29",
     "codelyzer": "0.0.19",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
@@ -58,8 +58,6 @@
     "karma-webpack": "^1.7.0",
     "null-loader": "^0.1.1",
     "phantomjs-prebuilt": "^2.1.13",
-    "protractor": "^4.0.9",
-    "protractor-jasmine2-screenshot-reporter": "^0.3.2",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.2",
     "run-sequence": "^1.2.2",

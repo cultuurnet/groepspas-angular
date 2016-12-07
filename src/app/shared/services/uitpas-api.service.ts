@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { GroupPassInfo } from "../../group-pass-info/group-pass-info";
-import { ConfigService } from '../../config/config.service';
+import { config } from '../../../config';
 
 @Injectable()
 export class UitpasApiService {
 
-  config: any;
-  private groupPassInfoUrl = 'http://vagrant.loc/web/group_pass/';
-
-  constructor (private http: Http, private configSrvc: ConfigService) {
-    this.config = this.configSrvc.config;
+  constructor (private http: Http) {
   }
 
   getGroupPassInfo(uitpasNumber : string) : Observable<GroupPassInfo> {
-    return this.http.get(this.config.apiUrl + uitpasNumber)
+    return this.http.get(config.apiUrl + uitpasNumber)
       .map(res => res.json())
       .catch(this.handleError);
   }

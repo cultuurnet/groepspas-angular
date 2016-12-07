@@ -11,7 +11,7 @@ module.exports = webpackMerge(commonConfig, {
 
     output: {
         path: helpers.root('dist'),
-        publicPath: '/',
+        publicPath: 'http://vagrant.loc/angular/',
         filename: '[name].[hash].js',
         chunkFilename: '[id].[hash].chunk.js'
     },
@@ -36,6 +36,6 @@ module.exports = webpackMerge(commonConfig, {
             'process.env': {
                 'ENV': JSON.stringify(ENV)
             }
-        })
+        }),
     ]
 });

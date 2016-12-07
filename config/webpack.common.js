@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var helpers = require('./helpers');
 
 module.exports = {
@@ -22,7 +23,9 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: 'html'
+                loader: 'html',
+                use: 'raw-loader',
+                exclude: [helpers.root('src/index.html')]
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
@@ -53,7 +56,11 @@ module.exports = {
         }),
 
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
-        })
+            template: 'src/index.html',
+            favicon: 'src/favicon.ico',
+            title: 'UitID Groepspas',
+            baseUrl: 'angular'
+        }),
+
     ]
 };

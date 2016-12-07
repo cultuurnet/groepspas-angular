@@ -7,7 +7,7 @@
     <form>
         <div class="text-left"><label>UiTPAS-nummer</label></div>
         <div class="group-pass-number pull-left"><input name="groupPassNumber" type="text" [(ngModel)]="groupPassNumber" required></div>
-        <div class="group-pass-submit pull-right"><button class="button" type="submit" (click)="getGroupPassInfo()">Bevestigen</button></div>
+        <div class="group-pass-submit pull-right"><button class="button" type="submit" (click)="getGroupPassInfo()"><i *ngIf="searching" class="fa fa-spinner fa-spin"></i><span *ngIf="!searching">Bevestigen</span></button></div>
     </form>
     <div class="group-pass-info text-left" *ngIf="groupPassInfo">
         <div class="info-title"><label>INFORMATIE GROEPSPAS</label></div>

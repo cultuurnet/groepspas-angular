@@ -28,8 +28,8 @@ module.exports = {
                 exclude: [helpers.root('src/index.html')]
             },
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]'
+                test: /\.(png|jpe?g|gif|ico)$/,
+                loader: 'file?name=assets/[name].[hash].[ext]',
             },
             {
                 test: /\.css$/,
@@ -40,7 +40,15 @@ module.exports = {
                 test: /\.css$/,
                 include: helpers.root('src', 'app'),
                 loader: 'raw'
-            }
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader"
+            },
         ]
     },
 

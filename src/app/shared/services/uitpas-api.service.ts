@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { GroupPassInfo } from "../../group-pass-info/group-pass-info";
-import { config } from '../../../config';
+import { config } from '../../../../config';
+
+export const API_ERROR_CODES = {
+  'UNKNOWN_GROUPPASS': "Dit is geen groepspas"
+}
 
 @Injectable()
 export class UitpasApiService {
@@ -11,23 +15,45 @@ export class UitpasApiService {
   }
 
   getGroupPassInfo(uitpasNumber : string) : Observable<GroupPassInfo> {
-    return this.http.get(config.apiUrl + uitpasNumber)
+    return this.http.get(config.apiUrl + 'group-pass/' + uitpasNumber)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
 
-    let errMsg: string;
+    let message: string;
+    let code: string;
     if (error instanceof Response) {
       const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      if (body.code && API_ERROR_CODES[body.code]) {
+        message = API_ERROR_CODES[body.code];
+        code = body.code;
+      }
+      else {
+        const err = body.error || JSON.stringify(body);
+        message = `${error.status} - ${error.statusText || ''} ${err}`;
+        code = '';
+      }
+
+
     } else {
-      errMsg = error.message ? error.message : error.toString();
+
+      if (error.code && API_ERROR_CODES[error.code]) {
+        message = API_ERROR_CODES[error.code];
+        code = error.code;
+      }
+      else {
+        message = error.message ? error.message : error.toString();
+        code = '';
+      }
+
     }
 
-    return Observable.throw(errMsg);
+    return Observable.throw({
+      code: code,
+      message: message
+    });
   }
 
 }

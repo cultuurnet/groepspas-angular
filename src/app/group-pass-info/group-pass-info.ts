@@ -7,5 +7,6 @@ export interface GroupPassInfo {
     ticketSaleCoupons : Object
     ticketsPerYear: number
     uuid : string
-    chance: boolean
+    chance: boolean,
+    expired: boolean
 }

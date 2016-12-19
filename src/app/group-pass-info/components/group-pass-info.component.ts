@@ -2,6 +2,14 @@ import {Component, Inject} from '@angular/core';
 import {UitpasApiService} from "../../shared/services/uitpas-api.service";
 import {GroupPassInfo} from "../group-pass-info";
 
+export const EXCHANGE_INFO = {
+    'YEAR': '{total} keer per jaar',
+    'MONTH': '{total} keer per maand',
+    'WEEK': '{total} keer per week',
+    'DAY': '{total} keer per dag',
+    'QUARTER': '{total} keer per kwartaal',
+    'ABSOLUTE': 'altijd inwisselbaar'
+}
 
 @Component({
     selector: '#group-pass-info',
@@ -18,6 +26,9 @@ export class GroupPassInfoComponent {
         this.searching = false;
     }
 
+    /**
+     * Load the grouppass info.
+     */
     getGroupPassInfo() {
         this.searching = true;
         this.groupPassError = null;
@@ -31,9 +42,31 @@ export class GroupPassInfoComponent {
 
     }
 
+    /**
+     * Set the error to shown.
+     */
     setError(error : any) {
+        if (error.code) {
+            this.groupPassError = error.message;
+        }
+        else {
+            this.groupPassError = "Dit is geen uitpasnummer."
+        }
         this.searching = false
-        this.groupPassError = "Er kan geen pas worden gevonden voor dit nummer."
+    }
+
+    /**
+     * Get the exchange info to show.
+     * @returns {string}
+     */
+    getExchangeInfoForCoupon(coupon: any) {
+
+        if (coupon.exchangeConstraint) {
+
+           return  EXCHANGE_INFO[coupon.exchangeConstraint.periodType].replace('{total}', coupon.exchangeConstraint.periodVolume);
+        }
+
+        return '';
     }
 
 }

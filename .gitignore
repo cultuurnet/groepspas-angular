@@ -19,6 +19,7 @@ coverage
 dist
 typings
 target
+config.ts
 
 # Editors
 # =======

@@ -1,5 +1,5 @@
 ## angular
-> This project is generated with [generator-angular2-typescript](https://github.com/shibbir/generator-angular2-typescript) version 0.10.2.
+The angular application for the groepspas project
 
 ## Installation
 
@@ -18,8 +18,3 @@ $ npm run build
 $ npm test
 ```
 
-## Running End-to-End Tests
-```bash
-# make sure you have a running app
-$ npm run e2e
-```

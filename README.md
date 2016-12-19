@@ -5,6 +5,7 @@ The angular application for the groepspas project
 
 ```bash
 $ npm install -g typescript
+$ npm install
 $ npm start
 ```
 

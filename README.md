@@ -5,6 +5,7 @@ The angular application for the groepspas project
 
 ```bash
 $ npm install -g typescript
+$ npm install -g webdriver-manager
 $ npm install
 $ npm start
 ```

@@ -19,7 +19,7 @@ coverage
 dist
 typings
 target
-config.ts
+config.json
 
 # Editors
 # =======

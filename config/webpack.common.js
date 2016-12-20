@@ -4,6 +4,11 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var helpers = require('./helpers');
 
+var config = require("json-loader!./../../config/config.json");
+
+const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+const API_URL = process.env.API_URL = config.apiUrl;
+
 module.exports = {
     entry: {
         polyfills: './src/polyfills.ts',
@@ -49,6 +54,10 @@ module.exports = {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: "url-loader"
             },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
         ]
     },
 
@@ -66,9 +75,16 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             favicon: 'src/favicon.ico',
-            title: 'UitID Groepspas',
-            baseUrl: 'angular'
+            title: config.title,
+            baseUrl: config.baseUrl
         }),
+
+      new webpack.DefinePlugin({
+        'process.env': {
+          'ENV': JSON.stringify(ENV),
+          'API_URL': JSON.stringify(API_URL)
+        }
+      })
 
     ]
 };

@@ -11,7 +11,10 @@ import '../favicon.ico';
 
 export class AppComponent implements OnInit {
 
-    constructor() {}
+    constructor() {
+        console.log(process.env);
+        //console.log(json);
+    }
 
     ngOnInit() {}
 }

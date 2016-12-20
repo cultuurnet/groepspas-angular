@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { GroupPassInfo } from "../../group-pass-info/group-pass-info";
-import { config } from '../../../../config';
 
 export const API_ERROR_CODES = {
   'UNKNOWN_GROUPPASS': "Dit is geen groepspas"
@@ -15,7 +14,7 @@ export class UitpasApiService {
   }
 
   getGroupPassInfo(uitpasNumber : string) : Observable<GroupPassInfo> {
-    return this.http.get(config.apiUrl + 'group-pass/' + uitpasNumber)
+    return this.http.get(process.env.API_URL + 'group-pass/' + uitpasNumber)
       .map(res => res.json())
       .catch(this.handleError);
   }

@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
+var config = require("json-loader!./../../config/config.json");
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = webpackMerge(commonConfig, {
@@ -11,7 +12,7 @@ module.exports = webpackMerge(commonConfig, {
 
     output: {
         path: helpers.root('dist'),
-        publicPath: 'http://vagrant.loc/angular/',
+        publicPath: config.publicPath,
         filename: '[name].[hash].js',
         chunkFilename: '[id].[hash].chunk.js'
     },

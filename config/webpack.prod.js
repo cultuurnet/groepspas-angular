@@ -6,6 +6,7 @@ var helpers = require('./helpers');
 
 var config = require("json-loader!./../../config/config.json");
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+const API_URL = process.env.API_URL = config.apiUrl;
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
@@ -35,8 +36,9 @@ module.exports = webpackMerge(commonConfig, {
         new ExtractTextPlugin('[name].[hash].css'),
         new webpack.DefinePlugin({
             'process.env': {
-                'ENV': JSON.stringify(ENV)
+                'ENV': JSON.stringify(ENV),
+                'API_URL': JSON.stringify(API_URL)
             }
-        }),
+        })
     ]
 });

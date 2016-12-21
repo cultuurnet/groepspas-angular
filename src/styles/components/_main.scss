@@ -59,3 +59,8 @@ hr {
 .pull-left {
   float: left;
 }
+
+// Input fields
+input:invalid {
+  box-shadow: none;
+}

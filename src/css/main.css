@@ -3523,12 +3523,16 @@ hr {
   float: left;
 }
 
+input:invalid {
+  box-shadow: none;
+}
+
 #group-pass-app {
   max-width: 500px;
   margin: 20px;
 }
 
-@media (min-width: 660px) {
+@media (min-width: 600px) {
   #group-pass-app {
     margin: 40px auto;
     padding-top: 100px;
@@ -3592,13 +3596,22 @@ hr {
 }
 
 #group-pass-app form .group-pass-number {
-  width: 75%;
+  width: 100%;
+  float: none;
+  margin-right: 0;
+}
+
+@media (min-width: 440px) {
+  #group-pass-app form .group-pass-number {
+    width: 73%;
+    float: left;
+    margin-right: 2%;
+  }
 }
 
 #group-pass-app form .group-pass-number input {
   padding: 0 10px;
-  width: 98%;
-  margin-right: 2%;
+  width: 100%;
   height: 45px;
   font-size: 18px;
 }
@@ -3608,7 +3621,17 @@ hr {
 }
 
 #group-pass-app form .group-pass-submit {
-  width: 25%;
+  width: 100%;
+  float: none;
+  margin-top: 20px;
+}
+
+@media (min-width: 440px) {
+  #group-pass-app form .group-pass-submit {
+    width: 25%;
+    float: right;
+    margin-top: 0;
+  }
 }
 
 #group-pass-app form .group-pass-submit .button {

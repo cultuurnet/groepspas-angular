@@ -3,12 +3,12 @@ import {UitpasApiService} from "../../shared/services/uitpas-api.service";
 import {GroupPassInfo} from "../group-pass-info";
 
 export const EXCHANGE_INFO = {
-    'YEAR': 'maximimum {total} keer per jaar inwisselbaar',
-    'MONTH': 'maximimum {total} keer per maand inwisselbaar',
-    'WEEK': 'maximimum {total} keer per week inwisselbaar',
-    'DAY': 'maximimum {total} keer per dag inwisselbaar',
-    'QUARTER': 'maximimum {total} keer per kwartaal inwisselbaar',
-    'ABSOLUTE': 'altijd inwisselbaar'
+    'YEAR': 'Maximimum {total} keer per jaar inwisselbaar',
+    'MONTH': 'Maximimum {total} keer per maand inwisselbaar',
+    'WEEK': 'Maximimum {total} keer per week inwisselbaar',
+    'DAY': 'Maximimum {total} keer per dag inwisselbaar',
+    'QUARTER': 'Maximimum {total} keer per kwartaal inwisselbaar',
+    'ABSOLUTE': 'Altijd inwisselbaar'
 }
 
 @Component({
@@ -50,7 +50,7 @@ export class GroupPassInfoComponent {
             this.groupPassError = error.message;
         }
         else {
-            this.groupPassError = "Dit is geen uitpasnummer."
+            this.groupPassError = "Dit is geen geldig UiTPas-nummer."
         }
         this.searching = false
     }

@@ -2,5 +2,5 @@
   "publicPath": "http://localhost:3000",
   "apiUrl": "http://vagrant.loc/silex/web/",
   "baseUrl" : "",
-  "title": "UitID Groepspas"
+  "title": "UiTPas Beheer Groepspas"
 }

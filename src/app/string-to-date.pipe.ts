@@ -17,6 +17,8 @@ export class StringToDatePipe implements PipeTransform {
      * @returns {Date} The Date object
      */
     transform(value: string): Date {
-        return new Date(value);
+        if (value) {
+            return new Date(value);
+        }
     }
 }

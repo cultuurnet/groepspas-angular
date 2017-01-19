@@ -18,7 +18,7 @@
             <div *ngIf="groupPassInfo.kansenStatuut">
                 <div>Kansenstatuut: Ja</div>
                 <div>Aantal resterende beurten: {{ groupPassInfo.availableTickets }}</div>
-                <div>Geldig tot: {{ groupPassInfo.endDate * 1000| stringToDate | date: 'dd/MM/yyyy'  }}</div>
+                <div [hidden]="!groupPassInfo.endDate">Geldig tot: {{ groupPassInfo.endDate * 1000| stringToDate | date: 'dd/MM/yyyy'  }}</div>
             </div>
             <div *ngIf="!groupPassInfo.kansenStatuut">
                 <div>Kansenstatuut: Nee</div>

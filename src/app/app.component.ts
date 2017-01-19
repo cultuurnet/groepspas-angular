@@ -9,12 +9,6 @@ import '../favicon.ico';
     template: require('./app.component.html')
 })
 
-export class AppComponent implements OnInit {
-
-    constructor() {
-        console.log(process.env);
-        //console.log(json);
-    }
-
+export class AppComponent {
     ngOnInit() {}
 }

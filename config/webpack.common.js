@@ -6,7 +6,7 @@ var helpers = require('./helpers');
 
 var config = require("json-loader!./../../config/config.json");
 
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+const ENV = process.env.NODE_ENV = process.env.ENV = 'DEV';
 const API_URL = process.env.API_URL = config.apiUrl;
 
 module.exports = {

@@ -10,5 +10,5 @@ import '../favicon.ico';
 })
 
 export class AppComponent {
-    ngOnInit() {}
+
 }

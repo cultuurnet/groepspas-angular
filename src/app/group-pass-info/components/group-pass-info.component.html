@@ -32,8 +32,11 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="groupPassInfo.expired">
+        <div *ngIf="groupPassInfo.expired && groupPassInfo.kansenStatuut">
             Kansenstatuut is vervallen.
+        </div>
+        <div *ngIf="groupPassInfo.expired && !groupPassInfo.kansenStatuut">
+            Coupon is vervallen
         </div>
     </div>
     <p><small>Heb je vragen, of ondervind je problemen? <a href="mailto:info@uitpas.be">Contacteer ons</a>.</small></p>

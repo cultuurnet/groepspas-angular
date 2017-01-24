@@ -4,7 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 import { GroupPassInfo } from "../../group-pass-info/group-pass-info";
 
 export const API_ERROR_CODES = {
-  'UNKNOWN_GROUPPASS': "UiTPas-nummer is geen groepspas."
+  'UNKNOWN_GROUPPASS': "Dit UiTPas-nummer is geen groepspas."
 }
 
 @Injectable()

@@ -3,11 +3,11 @@ import {UitpasApiService} from "../../shared/services/uitpas-api.service";
 import {GroupPassInfo} from "../group-pass-info";
 
 export const EXCHANGE_INFO = {
-    'YEAR': 'Maximimum {total} keer per jaar inwisselbaar',
-    'MONTH': 'Maximimum {total} keer per maand inwisselbaar',
-    'WEEK': 'Maximimum {total} keer per week inwisselbaar',
-    'DAY': 'Maximimum {total} keer per dag inwisselbaar',
-    'QUARTER': 'Maximimum {total} keer per kwartaal inwisselbaar',
+    'YEAR': '{total} keer per jaar inwisselbaar',
+    'MONTH': '{total} keer per maand inwisselbaar',
+    'WEEK': '{total} keer per week inwisselbaar',
+    'DAY': '{total} keer per dag inwisselbaar',
+    'QUARTER': '{total} keer per kwartaal inwisselbaar',
     'ABSOLUTE': 'Altijd inwisselbaar'
 }
 

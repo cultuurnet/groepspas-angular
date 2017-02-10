@@ -23,12 +23,14 @@
             <div *ngIf="!groupPassInfo.kansenStatuut">
                 <div>Kansenstatuut: Nee</div>
                 <div *ngFor="let coupon of groupPassInfo.ticketSaleCoupons">
-                    <div class="coupon-name"><label>{{ coupon.name }}</label></div>
-                    <ul>
-                        <li>Aantal resterende bonnen: {{ coupon.remainingTotal.periodVolume }}</li>
-                        <li [hidden]="!coupon.validTo">Geldig tot: {{ coupon.validTo * 1000 | stringToDate | date: 'dd/MM/yyyy' }}</li>
-                        <li>{{ getExchangeInfoForCoupon(coupon) }}</li>
-                    </ul>
+                    <div *ngIf="!coupon.expired">
+                        <div class="coupon-name"><label>{{ coupon.name }}</label></div>
+                        <ul>
+                            <li>Aantal resterende bonnen: {{ coupon.remainingTotal.periodVolume }}</li>
+                            <li [hidden]="!coupon.validTo">Geldig tot: {{ coupon.validTo * 1000 | stringToDate | date: 'dd/MM/yyyy' }}</li>
+                            <li>{{ getExchangeInfoForCoupon(coupon) }}</li>
+                        </ul>
+                     </div>
                 </div>
             </div>
         </div>

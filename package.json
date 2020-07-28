@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "lint": "tslint \"src/**/*.ts\"",
-    "postinstall": "webdriver-manager update",
     "start": "gulp serve",
     "build": "gulp build",
     "test": "karma start"

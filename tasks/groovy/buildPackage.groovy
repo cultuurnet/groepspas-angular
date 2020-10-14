@@ -14,3 +14,4 @@ def call() {
    }
    //command.execute(null, new File("Working dir"))
 }
+return this

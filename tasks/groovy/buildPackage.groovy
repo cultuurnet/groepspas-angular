@@ -1,5 +1,4 @@
 //This script is intended to be called from repoName/tasks/groovy/
-@NonCPS
 def call() {
    println "Creating a debian package from the binaries."
    "ls -a".execute()

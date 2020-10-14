@@ -9,10 +9,6 @@
    def upTwo = new File( "../../" ).getCanonicalPath()
    println "UpTwo dir:" + upTwo
    
-   dir('../../') {
-      def currentDir2 = new File( "." ).getCanonicalPath()
-      println "Current dir2:" + currentDir2
-   }
    //command.execute(null, new File("Working dir"))
 //}
 return this

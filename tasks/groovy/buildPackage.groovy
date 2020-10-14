@@ -1,6 +1,7 @@
 //This script is intended to be called from repoName/tasks/groovy/
 def call() {
    println "Creating a debian package from the binaries."
+   echo "Blah Blah"
    "ls -a".execute()
    def currentDir = new File( "." ).getCanonicalPath()
    println "Current dir:" + currentDir
@@ -14,4 +15,4 @@ def call() {
    }
    //command.execute(null, new File("Working dir"))
 }
-return this
+//return this

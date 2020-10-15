@@ -10,7 +10,6 @@ println "Creating a debian package from the binaries."
 
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
-println "Current dir: " + File.getCanonicalPath().toString()
 
 // File content
 //String text = '''{\n

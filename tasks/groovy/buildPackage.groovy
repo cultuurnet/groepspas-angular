@@ -11,23 +11,34 @@ println "Creating a debian package from the binaries."
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-// File content
-//String text = '''{\n
-//"publicPath": "PLACEHOLDER_PUBLICPATH",\n
-//"apiUrl": "PLACEHOLDER_APIURL",\n
-//"baseUrl" : "PLACEHOLDER_BASEURL",\n
-//"title": "PLACEHOLDER_TITLE"\n
-//}'''
+"node --version".execute() // For logging purposes.
+"npm --version".execute()  // For logging purposes.
+            
+//"npm install".execute()    // Installs the dependencies.
 
 //Create new file with content, 
-def file = new File("./config/config.json")
-file.createNewFile()
-file.text = '''{
+def configFile = new File("./config/config.json")
+configFile.createNewFile()
+configFile.text = '''{
 "publicPath": "PLACEHOLDER_PUBLICPATH",
 "apiUrl": "PLACEHOLDER_APIURL",
 "baseUrl" : "PLACEHOLDER_BASEURL",
 "title": "PLACEHOLDER_TITLE"
 }'''
-println file.text
+println configFile.text
+
+//"npm run build").execute()    // Builds the product.
+
+//Create new file with content, 
+def prermFile = new File("prerm")
+prermFile.createNewFile()
+prermFile.text = '''#!/bin/sh
+rm -rf /var/www/groepspas/scripts/scripts.*.js         
+'''
+
+//'bundle install --deployment --no-color'.execute()  //Download/install ruby gems needed in job. For example 'fpm'
+      
+File('pkg').mkdirs() //Make new directory
+
 
 return this

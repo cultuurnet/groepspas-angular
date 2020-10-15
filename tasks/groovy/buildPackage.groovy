@@ -19,10 +19,8 @@ println "Current dir:" + currentDir
 //"title": "PLACEHOLDER_TITLE"\n
 //}'''
 
-//Create new dir and file with content, 
-File dir = new File('config')
-dir.mkdir();
-File file = new File(dir + "config.json")
+//Create new file with content, 
+def file = new File(dir + "config/config.json")
 file.createNewFile()
 file.text = '''{
 "publicPath": "PLACEHOLDER_PUBLICPATH",

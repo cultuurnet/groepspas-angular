@@ -10,6 +10,7 @@ println "Creating a debian package from the binaries."
 
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
+println "Current dir: " + File.getCanonicalPath().toString()
 
 // File content
 //String text = '''{\n
@@ -20,7 +21,7 @@ println "Current dir:" + currentDir
 //}'''
 
 //Create new file with content, 
-def file = new File("config/config.json")
+def file = new File("./config/config.json")
 file.createNewFile()
 file.text = '''{
 "publicPath": "PLACEHOLDER_PUBLICPATH",

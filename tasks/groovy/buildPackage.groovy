@@ -20,7 +20,7 @@ println "Current dir:" + currentDir
 //}'''
 
 //Create new file with content, 
-def file = new File(dir + "config/config.json")
+def file = new File("config/config.json")
 file.createNewFile()
 file.text = '''{
 "publicPath": "PLACEHOLDER_PUBLICPATH",

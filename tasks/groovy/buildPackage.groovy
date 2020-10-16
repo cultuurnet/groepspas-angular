@@ -11,8 +11,10 @@ println "Creating a debian package from the binaries."
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-echo "node --version".execute() // For logging purposes.
-echo "npm --version".execute()  // For logging purposes.
+def proc = "node --version".execute()
+println (proc.in.text + proc.err.text)
+
+println "npm --version".execute().text  // For logging purposes.
             
 //"npm install".execute()    // Installs the dependencies.
 

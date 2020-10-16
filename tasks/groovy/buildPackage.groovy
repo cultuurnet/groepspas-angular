@@ -60,5 +60,14 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 def dir = new File("pkg")
 dir.mkdirs() 
 
+String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v "${pipelineVersion}" \\
+-s dir -a all -p pkg --deb-user www-data --deb-group www-data \\
+--license "Apache-2.0" -m "Infra publiq <infra@publiq.be>" \\
+--url "https://www.publiq.be" --vendor "publiq vzw" \\
+--description "AngularJS frontend for Groepspas" \\
+--prefix /var/www/groepspas --before-remove prerm -C dist \\
+-d rubygem-angular-config .'''
+
+printline temp
 
 return this

@@ -5,15 +5,25 @@
 // Bundler installed
 // Run: bundler
 // 
+def runCommand = { command -> 
+  println command
+  def proc = command.execute()
+  proc.in.eachLine { line -> println line }
+  proc.out.close()
+  proc.waitFor()
+
+  if (proc.exitValue()) {
+     println "[ERROR] ${proc.getErrorStream()}"
+  }
+}
+
 
 println "Creating a debian package from the binaries."
 
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-def proc = "node --version".execute()
-println (proc.in.text + proc.err.text)
-
+runCommand "node --version"
 println "npm --version".execute().text  // For logging purposes.
             
 //"npm install".execute()    // Installs the dependencies.

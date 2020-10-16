@@ -11,8 +11,8 @@ println "Creating a debian package from the binaries."
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-"node --version".execute() // For logging purposes.
-"npm --version".execute()  // For logging purposes.
+echo "node --version".execute() // For logging purposes.
+echo "npm --version".execute()  // For logging purposes.
             
 //"npm install".execute()    // Installs the dependencies.
 
@@ -37,8 +37,9 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 '''
 
 //'bundle install --deployment --no-color'.execute()  //Download/install ruby gems needed in job. For example 'fpm'
-      
-File('pkg').mkdirs() //Make new directory
+
+def dir = new File("pkg")
+dir.mkdirs() //Make new directory
 
 
 return this

@@ -68,6 +68,6 @@ String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v "${pipelineV
 --prefix /var/www/groepspas --before-remove prerm -C dist \\
 -d rubygem-angular-config .'''
 
-printline temp
+println temp
 
 return this

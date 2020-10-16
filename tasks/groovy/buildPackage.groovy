@@ -4,7 +4,8 @@
 // Node.js version 6.11.1 installed
 // Bundler installed
 // Run: bundler
-// 
+
+//This function runs a bash command, waits for it to finish, and outputs the results.
 def runCommand = { command -> 
   println command
   def proc = command.execute()
@@ -23,8 +24,13 @@ println "Creating a debian package from the binaries."
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-runCommand "node --version"
-println "npm --version".execute().text  // For logging purposes.
+///var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_6.11.1
+//System.setProperty("prp_name", "value")
+//env.NODEJS_HOME = "${tool "${nodeJSInstallation}"}"
+//env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+
+runCommand "node --version" // For logging purposes.
+runCommand "npm --version" // For logging purposes.
             
 //"npm install".execute()    // Installs the dependencies.
 
@@ -50,8 +56,9 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 
 //'bundle install --deployment --no-color'.execute()  //Download/install ruby gems needed in job. For example 'fpm'
 
+//Make new directory
 def dir = new File("pkg")
-dir.mkdirs() //Make new directory
+dir.mkdirs() 
 
 
 return this

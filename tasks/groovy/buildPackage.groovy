@@ -39,7 +39,7 @@ def runCommand = { strList ->
   assert ( strList instanceof String ||
            ( strList instanceof List && strList.each{ it instanceof String } ) \
 )
-  println command
+  println strList
   def proc = strList.execute()
   proc.in.eachLine { line -> println line }
   proc.out.close()
@@ -91,8 +91,6 @@ prermFile.text = '''#!/bin/sh
 rm -rf /var/www/groepspas/scripts/scripts.*.js         
 '''
 
-//'bundle install --deployment --no-color'.execute()  //Download/install ruby gems needed in job. For example 'fpm'
-
 //Make new directory
 def dir = new File("pkg").mkdirs() 
 
@@ -104,6 +102,6 @@ String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileNa
 --prefix /var/www/groepspas --before-remove prerm -C dist \\
 -d rubygem-angular-config .'''
 
-println temp
+//runCommand temp
 
 return this

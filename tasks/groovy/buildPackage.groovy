@@ -39,19 +39,22 @@ def runCommand = { strList ->
   assert ( strList instanceof String ||
            ( strList instanceof List && strList.each{ it instanceof String } ) \
 )
-  println strList
-  def proc = strList.execute()
-  proc.in.eachLine { line -> println line }
-  proc.out.close()
-  proc.waitFor()
-
-  print "[INFO] ( "
-  if(strList instanceof List) {
+  if(strList instanceof List) { //Output the command
     strList.each { print "${it} " }
+      println " "
   } else {
-    print strList
+    println strList
   }
-  println " )"
+  
+  println "Made it here 1"
+  def proc = strList.execute()
+  println "Made it here 2"
+  proc.in.eachLine { line -> println line }
+  println "Made it here 3"
+  proc.out.close()
+  println "Made it here 4"
+  proc.waitFor()
+  println "Made it here 5"
 
   if (proc.exitValue()) {
     println "gave the following error: "
@@ -68,8 +71,10 @@ println "Current dir:" + currentDir
 
 runCommand "node --version" // For logging purposes.
 runCommand "npm --version" // For logging purposes.
-            
+           
+println "Made it here 10"
 runCommand "npm install"  // Install the dependencies.
+println "Made it here 20"
 
 //Create new file with content, 
 def configFile = new File("./config/config.json")

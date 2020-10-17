@@ -6,8 +6,8 @@
 // Run: bundler
 import java.text.SimpleDateFormat
 
-def temp = new Date()
-println "Testing date " + temp.format("yyyyMMddHHmmss")
+def tempDate = new Date()
+println "Testing date " + tempDate.format("yyyyMMddHHmmss")
 
 String fileName = ''
 if(this.args[0]){

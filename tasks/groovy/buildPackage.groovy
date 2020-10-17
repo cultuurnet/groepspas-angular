@@ -20,16 +20,44 @@ else{
 }
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
-def runCommand = { command -> 
+//def runCommand = { command -> 
+//  println command
+//  def proc = command.execute()
+//  proc.in.eachLine { line -> println line }
+//  proc.out.close()
+//  proc.waitFor()
+//
+//  if (proc.exitValue()) {
+//     println "[ERROR] ${proc.getErrorStream()}"
+//  }
+//}
+
+// a wrapper closure around executing a string                                  
+// can take either a string or a list of strings (for arguments with spaces)    
+// prints all output, complains and halts on error                              
+def runCommand = { strList ->
+  assert ( strList instanceof String ||
+           ( strList instanceof List && strList.each{ it instanceof String } ) \
+)
   println command
-  def proc = command.execute()
+  def proc = strList.execute()
   proc.in.eachLine { line -> println line }
   proc.out.close()
   proc.waitFor()
 
-  if (proc.exitValue()) {
-     println "[ERROR] ${proc.getErrorStream()}"
+  print "[INFO] ( "
+  if(strList instanceof List) {
+    strList.each { print "${it} " }
+  } else {
+    print strList
   }
+  println " )"
+
+  if (proc.exitValue()) {
+    println "gave the following error: "
+    println "[ERROR] ${proc.getErrorStream()}"
+  }
+  assert !proc.exitValue()
 }
 
 

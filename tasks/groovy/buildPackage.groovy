@@ -43,7 +43,7 @@ configFile.text = '''{
 }'''
 println configFile.text
 
-"npm run build").execute()    // Builds the product.
+runCommand "npm run build"   // Builds the product.
 
 //Create new file with content, 
 def prermFile = new File("prerm")
@@ -55,8 +55,7 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 //'bundle install --deployment --no-color'.execute()  //Download/install ruby gems needed in job. For example 'fpm'
 
 //Make new directory
-def dir = new File("pkg")
-dir.mkdirs() 
+def dir = new File("pkg").mkdirs() 
 
 String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v "${pipelineVersion}" \\
 -s dir -a all -p pkg --deb-user www-data --deb-group www-data \\

@@ -6,8 +6,8 @@
 // Run: bundler
 import java.text.SimpleDateFormat
 
-def now = new Date()
-println "Testing date " + now.format("yyyyMMddHHmmss")
+def temp = new Date()
+println "Testing date " + temp.format("yyyyMMddHHmmss")
 
 String fileName = ''
 if(this.args[0]){
@@ -18,9 +18,6 @@ else{
    def now = new Date()
    fileName = now.format("yyyyMMddHHmmss") 
 }
-
-println "Test timestamp: " + (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
-String filename = this.args[0]? this.args[0]: (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
 def runCommand = { command -> 

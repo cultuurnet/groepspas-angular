@@ -20,50 +20,25 @@ else{
 }
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
-//def runCommand = { command -> 
-//  println command
-//  def proc = command.execute()
-//  proc.in.eachLine { line -> println line }
-//  proc.out.close()
-//  proc.waitFor()
-//
-//  if (proc.exitValue()) {
-//     println "[ERROR] ${proc.getErrorStream()}"
-//  }
-//}
-
-// a wrapper closure around executing a string                                  
-// can take either a string or a list of strings (for arguments with spaces)    
-// prints all output, complains and halts on error                              
-def runCommand = { strList ->
-  assert ( strList instanceof String ||
-           ( strList instanceof List && strList.each{ it instanceof String } ) \
-)
-  if(strList instanceof List) { //Output the command
-    strList.each { print "${it} " }
-      println " "
-  } else {
-    println strList
-  }
-  
+def runCommand = { command -> 
+  println command
+  def sout = new StringBuilder(), serr = new StringBuilder()
+  def proc = command.execute()
   println "Made it here 1"
-  def proc = strList.execute()
-  println "Made it here 2"
+  proc.consumeProcessOutput(sout, serr)  
   //proc.in.eachLine { line -> println line }
-  proc.in.newReader().eachLine { line -> println line}
-  println "Made it here 3"
+  println "Made it here 2"
   proc.out.close()
-  println "Made it here 4"
+  println "Made it here 3"
   proc.waitFor()
+  println "Made it here 4"
+  println "$sout"
   println "Made it here 5"
 
   if (proc.exitValue()) {
-    println "gave the following error: "
-    println "[ERROR] ${proc.getErrorStream()}"
+     println "[ERROR] ${proc.getErrorStream()}"
   }
-  assert !proc.exitValue()
 }
-
 
 println "Creating a debian package from the binaries."
 
@@ -73,9 +48,7 @@ println "Current dir:" + currentDir
 runCommand "node --version" // For logging purposes.
 runCommand "npm --version" // For logging purposes.
            
-println "Made it here 10"
 runCommand "npm install"  // Install the dependencies.
-println "Made it here 20"
 
 //Create new file with content, 
 def configFile = new File("./config/config.json")

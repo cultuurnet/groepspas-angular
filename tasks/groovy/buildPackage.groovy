@@ -49,7 +49,8 @@ def runCommand = { strList ->
   println "Made it here 1"
   def proc = strList.execute()
   println "Made it here 2"
-  proc.in.eachLine { line -> println line }
+  //proc.in.eachLine { line -> println line }
+  proc.in.newReader().eachLine { line -> println line}
   println "Made it here 3"
   proc.out.close()
   println "Made it here 4"

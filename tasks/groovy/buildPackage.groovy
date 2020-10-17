@@ -5,6 +5,9 @@
 // Bundler installed
 // Run: bundler
 
+println "Test timestamp: " + (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
+String filename = this.args[0]? this.args[0]: (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
+
 //This function runs a bash command, waits for it to finish, and outputs the results.
 def runCommand = { command -> 
   println command
@@ -24,15 +27,10 @@ println "Creating a debian package from the binaries."
 def currentDir = new File( "." ).getCanonicalPath()
 println "Current dir:" + currentDir
 
-///var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_6.11.1
-//System.setProperty("prp_name", "value")
-//env.NODEJS_HOME = "${tool "${nodeJSInstallation}"}"
-//env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-
 runCommand "node --version" // For logging purposes.
 runCommand "npm --version" // For logging purposes.
             
-//"npm install".execute()    // Installs the dependencies.
+runCommand "npm install"  // Install the dependencies.
 
 //Create new file with content, 
 def configFile = new File("./config/config.json")
@@ -45,7 +43,7 @@ configFile.text = '''{
 }'''
 println configFile.text
 
-//"npm run build").execute()    // Builds the product.
+"npm run build").execute()    // Builds the product.
 
 //Create new file with content, 
 def prermFile = new File("prerm")

@@ -4,6 +4,7 @@
 // Node.js version 6.11.1 installed
 // Bundler installed
 // Run: bundler
+import java.text.SimpleDateFormat
 
 println "Test timestamp: " + (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
 String filename = this.args[0]? this.args[0]: (new SimpleDateFormat("yyyyMMddHHmmss")).toString()

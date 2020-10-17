@@ -6,6 +6,19 @@
 // Run: bundler
 import java.text.SimpleDateFormat
 
+def now = new Date()
+println "Testing date " + now.format("yyyyMMddHHmmss")
+
+String fileName = ''
+if(this.args[0]){
+   fileName = this.args[0]
+}
+else{
+   println "No file name provided, using yyyyMMddHHmmss"
+   def now = new Date()
+   fileName = now.format("yyyyMMddHHmmss") 
+}
+
 println "Test timestamp: " + (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
 String filename = this.args[0]? this.args[0]: (new SimpleDateFormat("yyyyMMddHHmmss")).toString()
 
@@ -58,7 +71,7 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 //Make new directory
 def dir = new File("pkg").mkdirs() 
 
-String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v "${pipelineVersion}" \\
+String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + ''' \\
 -s dir -a all -p pkg --deb-user www-data --deb-group www-data \\
 --license "Apache-2.0" -m "Infra publiq <infra@publiq.be>" \\
 --url "https://www.publiq.be" --vendor "publiq vzw" \\

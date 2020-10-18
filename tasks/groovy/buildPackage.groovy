@@ -20,7 +20,8 @@ else{
 }
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
-def runCommand = { command -> 
+def runCommand = { command ->
+  
   println command
   def sout = new StringBuilder(), serr = new StringBuilder()
   def proc = command.execute()
@@ -73,7 +74,7 @@ String command = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fil
                  ''' -s dir -a all -p pkg --deb-user www-data --deb-group www-data''' + 
                  ''' --license "Dude" -m "Infradude"''' +
                  ''' --url "dude" --vendor "dudevzw"''' +
-                 ''' --description "AngularJS frontend for Groepspas"''' + 
+                 ''' --description "AngularJS\ frontend for Groepspas"''' + 
                  ''' --prefix /var/www/groepspas --before-remove prerm -C dist''' + 
                  ''' -d rubygem-angular-config .'''
 

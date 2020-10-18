@@ -24,16 +24,11 @@ def runCommand = { command ->
   println command
   def sout = new StringBuilder(), serr = new StringBuilder()
   def proc = command.execute()
-  println "Made it here 1"
   proc.consumeProcessOutput(sout, serr)  
   //proc.in.eachLine { line -> println line }
-  println "Made it here 2"
   proc.out.close()
-  println "Made it here 3"
   proc.waitFor()
-  println "Made it here 4"
   println "$sout"
-  println "Made it here 5"
 
   if (proc.exitValue()) {
      println "[ERROR] ${proc.getErrorStream()}"
@@ -73,7 +68,7 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 //Make new directory
 def dir = new File("pkg").mkdirs() 
 
-String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + ''' \\
+String command = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + ''' \\
 -s dir -a all -p pkg --deb-user www-data --deb-group www-data \\
 --license "Apache-2.0" -m "Infra publiq <infra@publiq.be>" \\
 --url "https://www.publiq.be" --vendor "publiq vzw" \\
@@ -81,6 +76,6 @@ String temp = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileNa
 --prefix /var/www/groepspas --before-remove prerm -C dist \\
 -d rubygem-angular-config .'''
 
-//runCommand temp
+runCommand command
 
 return this

@@ -71,8 +71,8 @@ def dir = new File("pkg").mkdirs()
 
 String command = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + 
                  ''' -s dir -a all -p pkg --deb-user www-data --deb-group www-data''' + 
-                 ''' --license "Apache-2.0" -m "Infra dude"''' +
-                 ''' --url "dude" --vendor "dude vzw"''' +
+                 ''' --license "Dude" -m "Infradude"''' +
+                 ''' --url "dude" --vendor "dudevzw"''' +
                  ''' --description "AngularJS frontend for Groepspas"''' + 
                  ''' --prefix /var/www/groepspas --before-remove prerm -C dist''' + 
                  ''' -d rubygem-angular-config .'''

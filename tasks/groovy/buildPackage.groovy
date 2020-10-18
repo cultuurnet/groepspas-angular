@@ -71,10 +71,11 @@ def dir = new File("pkg").mkdirs()
 
 String command = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + 
                  ''' -s dir -a all -p pkg --deb-user www-data --deb-group www-data''' + 
-                 ''' -m "Infra publiq <infra@publiq.be>" -C dist -d rubygem-angular-config --license "Apache-2.0"''' +
+                 ''' --license "Apache-2.0" -m "Infra publiq"''' +
                  ''' --url "https://www.publiq.be" --vendor "publiq vzw"''' +
                  ''' --description "AngularJS frontend for Groepspas"''' + 
-                 ''' --prefix /var/www/groepspas --before-remove prerm .'''
+                 ''' --prefix /var/www/groepspas --before-remove prerm -C dist''' + 
+                 ''' -d rubygem-angular-config .'''
 
 runCommand command
 

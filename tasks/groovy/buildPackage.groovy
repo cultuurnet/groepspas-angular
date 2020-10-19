@@ -7,7 +7,7 @@
 import java.text.SimpleDateFormat
 
 String version = ''
-if(this.args[0]){
+if(args.size() > 0){
    version = this.args[0]
 }
 else{

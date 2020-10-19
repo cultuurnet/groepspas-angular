@@ -91,7 +91,7 @@ List command = ['bundle', 'exec', 'fpm', '-t', 'deb', '-n groepspas-angular-app'
                 //'-m \"Infra publiq <infra@publiq.be>\" --url \"https:\/\/www.publiq.be\" --vendor \"publiq vzw\"' +
                 '''-m "Infra publiq <infra@publiq.be>" --url "https://www.publiq.be" --vendor "publiq vzw"''' +
                 '''--description "AngularJS frontend for Groepspas" --prefix /var/www/groepspas --before-remove prerm''', 
-                '-C dist', '-d rubygem-angular-config', '.']
+                '-C ./dist', '-d rubygem-angular-config', '.']
 
 runCommand command
 

@@ -39,6 +39,7 @@ def runCommand = { command ->
 
   if (proc.exitValue()) {
      println "[ERROR] ${proc.getErrorStream()}"
+      println "${serr}"
      System.exit(proc.exitValue())
   }
 }

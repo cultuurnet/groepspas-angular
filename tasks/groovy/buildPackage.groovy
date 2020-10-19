@@ -9,14 +9,14 @@ import java.text.SimpleDateFormat
 def tempDate = new Date()
 println "Testing date " + tempDate.format("yyyyMMddHHmmss")
 
-String fileName = ''
+String version = ''
 if(this.args[0]){
-   fileName = this.args[0]
+   version = this.args[0]
 }
 else{
    println "No file name provided, using yyyyMMddHHmmss"
    def now = new Date()
-   fileName = now.format("yyyyMMddHHmmss") 
+   version = now.format("yyyyMMddHHmmss") 
 }
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
@@ -77,16 +77,8 @@ rm -rf /var/www/groepspas/scripts/scripts.*.js
 //Make new directory
 def dir = new File("pkg").mkdirs() 
 
-//String command = '''bundle exec fpm -t deb -n groepspas-angular-app -v ''' + fileName + 
-//                 ''' -s dir -a all -p pkg --deb-user www-data --deb-group www-data''' + 
-//                 ''' --license "Apache-2.0" -m "Infra publiq <infra@publiq.be>"''' +
-//                 ''' --url "https://www.publiq.be" --vendor "publiq vzw"''' +
-//                 ''' --description "AngularJS frontend for Groepspas"''' + 
-//                 ''' --prefix /var/www/groepspas --before-remove prerm -C dist''' + 
-//                 ''' -d rubygem-angular-config .'''
-
-// THe following characters need to be escaped #{\'}${"}/'
-List command = ['bundle', 'exec', 'fpm', '-t', 'deb', '-n', 'groepspas-angular-app', '-v', "${fileName}", '-s', 'dir', '-a', 'all', 
+// build the fpm command
+List command = ['bundle', 'exec', 'fpm', '-t', 'deb', '-n', 'groepspas-angular-app', '-v', "${version}", '-s', 'dir', '-a', 'all', 
                 '-p', 'pkg', '--deb-user', 'www-data', '--deb-group', 'www-data', '--license', '\"Apache-2.0\"',
                 '-m', 'Infra publiq <infra@publiq.be>', '--url', '''"https://www.publiq.be"''', '--vendor', 'publiq vzw',
                 '--description', '\"AngularJS frontend for Groepspas\"', '--prefix', '''/var/www/groepspas''', '--before-remove', 'prerm', 

@@ -3,11 +3,8 @@
 // Groovy installed(latest versio is ok)
 // Node.js version 6.11.1 installed
 // Bundler installed
-// Run: bundler
+// Run: bundle install --deployment --no-color (this installs fpm among other things) 
 import java.text.SimpleDateFormat
-
-def tempDate = new Date()
-println "Testing date " + tempDate.format("yyyyMMddHHmmss")
 
 String version = ''
 if(this.args[0]){

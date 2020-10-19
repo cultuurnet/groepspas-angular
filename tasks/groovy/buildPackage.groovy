@@ -21,13 +21,13 @@ else{
 
 //This function runs a bash command, waits for it to finish, and outputs the results.
 def runCommand = { command ->
-  print "$ "
+  //print command
   if(strList instanceof List) {
-    strList.each { print "${it} " }
+     strList.each { print "${it} " }
+     println " "
   } else {
-    print strList
+     println strList
   }
-  println " "
     
   def sout = new StringBuilder(), serr = new StringBuilder()
   def proc = command.execute()

@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'fpm', '~> 1.11.0'
-gem 'ffi', '~> 1.9.10'
+gem 'rake', '~> 13.0'
+
+group :package do
+  gem 'fpm', '= 1.14.1'
+end

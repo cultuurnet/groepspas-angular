@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     }),
     runSequence = require('run-sequence');
 
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 
 var input = './src/styles/**/*.scss';
 var output = './src/css';

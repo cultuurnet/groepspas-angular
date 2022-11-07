@@ -1,91 +1,71 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var helpers = require('./helpers');
-var loadConfig = require('./loadConfig')
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-var config = loadConfig("./config.dist.json")
+const helpers = require("./helpers");
+const loadConfig = require("./loadConfig");
 
-const ENV = process.env.NODE_ENV = process.env.ENV = 'DEV';
-const API_URL = process.env.API_URL = config.apiUrl;
+const config = loadConfig("./config.json");
 
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
-    entry: {
-        polyfills: './src/polyfills.ts',
-        vendor: './src/vendor.ts',
-        app: './src/main.ts'
-    },
-
+    mode: "none",
+    entry: ["./src/polyfills.ts", "./src/vendor.ts", "./src/main.ts"],
+    // output: {
+    //     path: helpers.root("dist"),
+    //     chunkFilename: "[id].[hash].chunk.js",
+    //     assetModuleFilename: "assets/[name].[hash].[ext]",
+    // },
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ["", ".js", ".ts"],
     },
-
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
-                loader: 'ts'
+                use: "ts-loader",
             },
             {
                 test: /\.html$/,
-                loader: 'html',
-                use: 'raw-loader',
-                exclude: [helpers.root('src/index.html')]
+                use: "raw-loader",
+                exclude: [helpers.root("src/index.html")],
             },
             {
                 test: /\.(png|jpe?g|gif|ico)$/,
-                loader: 'file?name=assets/[name].[hash].[ext]',
+                type: "asset/resource",
             },
             {
                 test: /\.css$/,
-                exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+                exclude: helpers.root("src", "app"),
+                use: ["style-loader", "css-loader"],
             },
             {
                 test: /\.css$/,
-                include: helpers.root('src', 'app'),
-                loader: 'raw'
+                include: helpers.root("src", "app"),
+                loader: "raw",
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader"
+                loader: "url-loader",
             },
             {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader"
+                loader: "url-loader",
             },
-            {
-                test: /\.json$/,
-                loader: 'json-loader'
-            },
-        ]
+        ],
     },
-
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'vendor', 'polyfills']
-        }),
-
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        }),
-
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            favicon: 'src/favicon.ico',
+            template: "src/index.html",
+            favicon: "src/favicon.ico",
             title: config.title,
-            baseUrl: config.baseUrl
+            baseUrl: config.baseUrl,
         }),
-
-      new webpack.DefinePlugin({
-        'process.env': {
-          'ENV': JSON.stringify(ENV),
-          'API_URL': JSON.stringify(API_URL)
-        }
-      })
-
-    ]
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+        }),
+    ],
 };

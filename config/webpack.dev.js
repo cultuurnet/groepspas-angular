@@ -1,27 +1,43 @@
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.common.js');
-var helpers = require('./helpers');
-var loadConfig = require('./loadConfig')
+const webpack = require("webpack");
+const { merge: webpackMerge } = require("webpack-merge");
+const commonConfig = require("./webpack.common.js");
+const helpers = require("./helpers");
+const loadConfig = require("./loadConfig");
+const TerserPlugin = require("terser-webpack-plugin");
 
-var config = loadConfig("./config.dist.json")
+const config = loadConfig("./config.json");
 
-module.exports = webpackMerge(commonConfig, {
-    devtool: 'cheap-module-eval-source-map',
+const ENV = (process.env.NODE_ENV = process.env.ENV = "production");
+const API_URL = (process.env.API_URL = config.apiUrl);
+
+/**
+ * @type {import('webpack').Configuration}
+ */
+const developmentConfigOverrides = {
+    devtool: "eval-cheap-source-map",
+
+    mode: "development",
 
     output: {
-        path: helpers.root('dist'),
+        path: helpers.root("dist"),
         publicPath: config.publicPath,
-        filename: '[name].js',
-        chunkFilename: '[id].chunk.js'
+        chunkFilename: "[id].[hash].chunk.js",
+        assetModuleFilename: "assets/[name].[hash].[ext]",
     },
 
     plugins: [
-        new ExtractTextPlugin('[name].css'),
+        new webpack.DefinePlugin({
+            "process.env": {
+                ENV: JSON.stringify(ENV),
+                API_URL: JSON.stringify(API_URL),
+            },
+        }),
     ],
 
     devServer: {
-        historyApiFallback: true,
-        stats: 'minimal'
-    }
-});
+        compress: true,
+        port: 3000,
+    },
+};
+
+module.exports = webpackMerge(commonConfig, developmentConfigOverrides);

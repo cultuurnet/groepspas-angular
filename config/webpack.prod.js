@@ -1,46 +1,43 @@
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var commonConfig = require('./webpack.common.js');
-var helpers = require('./helpers');
-var loadConfig = require('./loadConfig')
+const webpack = require("webpack");
+const { merge: webpackMerge } = require("webpack-merge");
+const commonConfig = require("./webpack.common.js");
+const helpers = require("./helpers");
+const loadConfig = require("./loadConfig");
+const TerserPlugin = require("terser-webpack-plugin");
 
-var config = loadConfig("./config.dist.json")
+const config = loadConfig("./config.json");
 
-const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
-const API_URL = process.env.API_URL = config.apiUrl;
+const ENV = (process.env.NODE_ENV = process.env.ENV = "production");
+const API_URL = (process.env.API_URL = config.apiUrl);
 
-module.exports = webpackMerge(commonConfig, {
+/**
+ * @type {import('webpack').Configuration}
+ */
+const productionConfigOverrides = {
     devtool: 'source-map',
 
+    mode: "production",
+
     output: {
-        path: helpers.root('dist'),
+        path: helpers.root("dist"),
         publicPath: config.publicPath,
-        filename: '[name].[hash].js',
-        chunkFilename: '[id].[hash].chunk.js'
+        chunkFilename: "[id].[hash].chunk.js",
+        assetModuleFilename: "assets/[name].[hash].[ext]",
     },
 
-    htmlLoader: {
-        minimize: false // workaround for ng2
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({ terserOptions: { keep_fnames: true } })],
     },
 
     plugins: [
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            mangle: {
-                keep_fnames: true
-            }
-        }),
-        new ExtractTextPlugin('[name].[hash].css'),
         new webpack.DefinePlugin({
-            'process.env': {
-                'ENV': JSON.stringify(ENV),
-                'API_URL': JSON.stringify(API_URL)
-            }
-        })
-    ]
-});
+            "process.env": {
+                ENV: JSON.stringify(ENV),
+                API_URL: JSON.stringify(API_URL),
+            },
+        }),
+    ],
+};
+
+module.exports = webpackMerge(commonConfig, productionConfigOverrides);

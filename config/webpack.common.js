@@ -12,11 +12,6 @@ const config = loadConfig("./config.json");
 module.exports = {
     mode: "none",
     entry: ["./src/polyfills.ts", "./src/vendor.ts", "./src/main.ts"],
-    // output: {
-    //     path: helpers.root("dist"),
-    //     chunkFilename: "[id].[hash].chunk.js",
-    //     assetModuleFilename: "assets/[name].[hash].[ext]",
-    // },
     resolve: {
         extensions: ["", ".js", ".ts"],
     },

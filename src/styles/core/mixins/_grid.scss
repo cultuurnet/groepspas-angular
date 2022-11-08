@@ -1,19 +1,21 @@
 // Grid system
 
 // Centered container element
+@use "sass:math";
+
 @mixin container-fluid($gutter: $grid-gutter-width) {
   @include cf();
   margin-right: auto;
   margin-left: auto;
-  padding-left: ($gutter / 2);
-  padding-right: ($gutter / 2);
+  padding-left: ($gutter * 0.5);
+  padding-right: ($gutter * 0.5);
 }
 
 // Creates a wrapper for a series of columns
 @mixin make-row($gutter: $grid-gutter-width) {
   @include cf();
-  margin-left:  ($gutter / -2);
-  margin-right: ($gutter / -2);
+  margin-left:  math.div($gutter, -2);
+  margin-right: math.div($gutter, -2);
 }
 
 // Creates a single column
@@ -21,14 +23,14 @@
   @include cf();
   display: block;
   float: left;
-  padding-left: ($gutter / 2);
-  padding-right: ($gutter / 2);
-  width: round(percentage($index / $columns)*1000)/1000;
+  padding-left: ($gutter * 0.5);
+  padding-right: ($gutter * 0.5);
+  width: round(percentage(math.div($index, $columns))*1000)*0.001;
   min-height: 1px;
 }
 
 @mixin make-column-push($index, $columns: $grid-columns) {
-  margin-left: round(percentage($index / $columns)*1000)/1000;
+  margin-left: round(percentage(math.div($index, $columns))*1000)*0.001;
 }
 
 // Grid Framework
@@ -40,8 +42,8 @@
     content: '';
     position: absolute;
     top: -($rh-sml + 1);
-    right: ($grid-gutter-width / 2);
-    left: ($grid-gutter-width / 2);
+    right: ($grid-gutter-width * 0.5);
+    left: ($grid-gutter-width * 0.5);
     display: block;
     border-top: none;
   }

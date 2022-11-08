@@ -1,17 +1,19 @@
 // Functions
 //
 // Based on the relative-size function from Stitch, http://stitchcss.com/
+@use "sass:math";
+
 @function relative-size( $target, $context: $font-size-base, $unit: rem ) {
-  @return #{$target/$context}$unit;
+  @return #{math.div($target, $context)}$unit;
 }
 @function rs( $target, $context: $font-size-base, $unit: rem ) {
   @return relative-size($target, $context, $unit);
 }
 @function fs( $target, $context: $font-size-base, $unit: rem ) {
-  @return #{round(($target/$context)*1000)/1000}$unit;
+  @return #{round(math.div($target, $context)*1000)*0.001}$unit;
 }
 @function lh( $target, $context: $font-size-base ) {
-  @return round(($target/$context)*1000)/1000;
+  @return round(math.div($target, $context)*1000)*0.001;
 }
 
 // [converter] $parent hack

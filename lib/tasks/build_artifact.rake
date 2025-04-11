@@ -15,8 +15,7 @@ task :build_artifact do |task|
   FileUtils.mkdir_p('pkg')
 
   system("fpm -s dir -t deb -n #{artifact_name} -v #{version} -a all -p pkg \
-    -C dist -d rubygem-angular-config \
-    --prefix /var/www/uitpas-groepspas \
+    -C dist --prefix /var/www/uitpas-groepspas \
     --before-remove lib/tasks/prerm \
     --deb-user www-data --deb-group www-data \
     --description '#{description}' --url '#{source}' --vendor '#{vendor}' \

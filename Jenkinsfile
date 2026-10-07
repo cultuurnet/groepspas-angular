@@ -34,7 +34,8 @@ pipeline {
                         writeFile file: 'config/config.json', text: '{"publicPath":"PLACEHOLDER_PUBLICPATH","apiUrl":"PLACEHOLDER_APIURL","baseUrl":"PLACEHOLDER_BASEURL","title":"PLACEHOLDER_TITLE"}'
                         sh label: 'Install node modules', script: 'npm ci'
                         sh label: 'Build project', script: 'npm run build'
-                        stash name: 'dist', includes: 'dist/**'
+                        sh label: 'Archive build', script: 'tar czf dist.tgz dist'
+                        stash name: 'dist', includes: 'dist.tgz'
                     }
                     post {
                         cleanup {
@@ -52,6 +53,7 @@ pipeline {
                     steps {
                         sh label: 'Install rubygems', script: 'bundle install --deployment'
                         unstash 'dist'
+                        sh label: 'Extract build', script: 'tar xzf dist.tgz && rm dist.tgz'
                         sh label: 'Build artifact', script: "bundle exec rake build_artifact ARTIFACT_VERSION=${env.ARTIFACT_VERSION}"
                         archiveArtifacts artifacts: "pkg/*${env.ARTIFACT_VERSION}*.deb", onlyIfSuccessful: true
                     }

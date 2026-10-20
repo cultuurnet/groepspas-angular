@@ -28,6 +28,7 @@ pipeline {
                             reuseNode true
                         }
                     }
+                    options { skipDefaultCheckout() }
                     environment {
                         npm_config_cache = '/tmp/.npm-cache'
                     }
@@ -45,6 +46,7 @@ pipeline {
                             reuseNode true
                         }
                     }
+                    options { skipDefaultCheckout() }
                     environment {
                         GIT_SHORT_COMMIT = util.shortCommitRef()
                         ARTIFACT_VERSION = "${env.PIPELINE_VERSION}" + '+sha.' + "${env.GIT_SHORT_COMMIT}"
